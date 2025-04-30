@@ -1,0 +1,15 @@
+1. If songs.db contains the top 100 songs of one listener from 2018, how would you characterize their audio aura?
+
+Based on the average values of energy, valence, and danceability in songs.db, I would describe the listener’s audio aura as [INSERT MOODS HERE, e.g., "energetic and cheerful"] if the averages are high, or perhaps "melancholic and mellow" if the values are lower. For example, if the average energy and danceability are high but valence is low, their aura might reflect intensity and emotional depth.
+
+2. Hypothesize about why the way you’ve calculated this aura might not be very representative of the listener.
+
+This calculation may not accurately reflect the listener’s actual emotional state or preferences because it reduces complex musical experiences to just three averaged values. It ignores lyrical content, song context (e.g., seasonal listening habits), and listening frequency distribution (i.e., some songs may be played far more than others). Averaging also treats all songs as equally important, which may not be true.
+
+3. What better ways of calculating this aura would you propose?
+
+A better approach would be to:
+- Weight the metrics based on play counts, giving more influence to frequently played songs.
+- Include lyrical sentiment analysis to understand the emotional tone of songs more deeply.
+- Cluster songs into mood-based categories using machine learning to identify more nuanced listener moods.
+- Factor in listening trends over time (e.g., mood shifts month by month) to reflect evolving emotional states.
