@@ -1,0 +1,31 @@
+HTML Tags Used:
+1. <h1>
+2. <h2>
+3. <p>
+4. <a>
+5. <ul>
+6. <li>
+7. <img>
+8. <form>
+9. <input>
+10. <button>
+
+CSS Selectors Used:
+1. body
+2. h1, h2
+3. .highlight
+4. #main-title
+5. .navbar a
+
+CSS Properties Used:
+1. font-family
+2. color
+3. margin
+4. padding
+5. background-color
+
+Bootstrap Used:
+Used Bootstrap’s Navbar, Form, and Button classes for layout and styling.
+
+JavaScript Used:
+Added a button that triggers an alert on the homepage using JavaScript.
