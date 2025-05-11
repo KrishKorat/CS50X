@@ -260,4 +260,49 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+    user_id = session["user_id"]
+
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        shares_input = request.form.get("shares")
+
+        if not symbol:
+            return apology("must select a stock")
+
+        if not shares_input or not shares_input.isdigit() or int(shares_input) <= 0:
+            return apology("shares must be a positive integer")
+        shares_to_sell = int(shares_input)
+
+        row = db.execute("""
+            SELECT SUM(shares) as total_shares FROM transactions
+            WHERE user_id = ? AND symbol = ?
+            GROUP BY symbol
+        """, user_id, symbol)
+
+        if not row or row[0]["total_shares"] < shares_to_sell:
+            return apology("not enough shares")
+
+        stock = lookup(symbol)
+        if not stock:
+            return apology("invalid symbol")
+
+        price = stock["price"]
+        total_earnings = price * shares_to_sell
+
+        db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)",
+                   user_id, symbol, -shares_to_sell, price)
+
+        db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", total_earnings, user_id)
+
+        return redirect("/")
+
+    else:
+        rows = db.execute("""
+            SELECT symbol FROM transactions
+            WHERE user_id = ?
+            GROUP BY symbol
+            HAVING SUM(shares) > 0
+        """, user_id)
+
+        symbols = [row["symbol"] for row in rows]
+        return render_template("sell.html", symbols=symbols)
