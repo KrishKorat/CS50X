@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+  <form action="/register" method="post">
+
+    <input type="text" name="name" placeholder="name" autocomplete="off"/>
+
+    {% for sport in sports %}
+      <input name="sport" type="radio" value="{{sport}}">{{sport}}
+    {% endfor %}
+    
+    <button type="submit">register</button>
+  </form>
+
+{% endblock %}
