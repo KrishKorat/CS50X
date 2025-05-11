@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Portfolio</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Shares</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in holdings %}
+                    <tr>
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.name }}</td>
+                        <td>{{ stock.shares }}</td>
+                        <td>{{ stock.price | usd }}</td>
+                        <td>{{ stock.total | usd }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="table-primary">
+                        <td colspan="4" class="text-end fw-bold">Cash</td>
+                        <td class="fw-bold">{{ cash | usd }}</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td colspan="4" class="text-end fw-bold">Grand Total</td>
+                        <td class="fw-bold">{{ grand_total | usd }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

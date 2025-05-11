@@ -38,7 +38,43 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+    user_id = session["user_id"]
+
+    rows = db.execute("""
+        SELECT symbol, SUM(shares) as total_shares
+        FROM transactions
+        WHERE user_id = ?
+        GROUP BY symbol
+        HAVING total_shares > 0
+    """, user_id)
+
+    holdings = []
+    total_value = 0
+
+
+    for row in rows:
+
+        symbol = row["symbol"]
+        shares = row["total_shares"]
+        stock = lookup(symbol)
+
+        if stock:
+            price = stock["price"]
+            total = price * shares
+            total_value += total
+
+            holdings.append({
+                "symbol": symbol,
+                "name": stock["name"],
+                "shares": shares,
+                "price": price,
+                "total": total
+            })
+    
+    cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
+    grand_total = total_value + cash
+
+    return render_template("index.html", holdings=holdings, cash=cash, grand_total=grand_total)
 
 
 
