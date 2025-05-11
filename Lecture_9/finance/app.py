@@ -31,6 +31,9 @@ def after_request(response):
     return response
 
 
+
+
+
 @app.route("/")
 @login_required
 def index():
@@ -38,11 +41,52 @@ def index():
     return apology("TODO")
 
 
+
+
+
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
+    if request.method == "POST":
+
+        symbol = request.form.get("symbol")
+        shares = request.form.get("shares")
+
+        # Validate symbol
+        if not symbol:
+            return apology("must provide symbol")
+        stock = lookup(symbol)
+        if not stock:
+            return apology("invalid stock symbol")
+
+        # Validate shares
+        if not shares or not shares.isdigit() or int(shares) <= 0:
+            return apology("shares must be a positive integer")
+        shares = int(shares)
+
+
+        user_id = session["user_id"]
+        rows = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
+        cash = rows[0]["cash"]
+
+        price = stock["price"]
+        total_cost = price * shares
+
+
+        if total_cost > cash:
+            return apology("can't afford")
+        
+        db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)", user_id, stock["symbol"], shares, price)
+        db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", total_cost, user_id)
+
+        return redirect("/")
+    
+    else:
+        return render_template("buy.html")
+
+
+
 
 
 @app.route("/history")
