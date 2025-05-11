@@ -315,3 +315,28 @@ def sell():
 
         symbols = [row["symbol"] for row in rows]
         return render_template("sell.html", symbols=symbols)
+
+
+
+
+# Option to add extra cash
+
+@app.route("/add_cash", methods=["GET", "POST"])
+@login_required
+def add_cash():
+    if request.method == "POST":
+        amount = request.form.get("amount")
+
+        # Validate input
+        if not amount or not amount.isdigit() or int(amount) <= 0:
+            return apology("Enter a valid positive amount")
+
+        cash_to_add = int(amount)
+
+        # Update user's cash
+        db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", cash_to_add, session["user_id"])
+
+        return redirect("/")
+
+    else:
+        return render_template("add_cash.html")
