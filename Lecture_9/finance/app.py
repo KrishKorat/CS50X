@@ -235,12 +235,12 @@ def register():
         if not password:
             return apology("must provide password")
 
-        # Conformation
-        conformation = request.form.get("conformation")
-        if not conformation:
+        # Confirmation
+        confirmation = request.form.get("confirmation")
+        if not confirmation:
             return apology("must provide conformation password")
         
-        if password != conformation:
+        if password != confirmation:
             return apology("must provide same password")
         
 
