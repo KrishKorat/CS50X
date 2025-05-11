@@ -264,7 +264,6 @@ def register():
 
 
 
-
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
@@ -275,13 +274,19 @@ def sell():
         symbol = request.form.get("symbol")
         shares_input = request.form.get("shares")
 
+        # Validate stock symbol
         if not symbol:
             return apology("must select a stock")
 
-        if not shares_input or not shares_input.isdigit() or int(shares_input) <= 0:
+        # Validate shares
+        if not shares_input or not shares_input.isdigit():
             return apology("shares must be a positive integer")
+        
         shares_to_sell = int(shares_input)
+        if shares_to_sell <= 0:
+            return apology("shares must be greater than 0")
 
+        # Check user's shares
         row = db.execute("""
             SELECT SUM(shares) as total_shares FROM transactions
             WHERE user_id = ? AND symbol = ?
@@ -291,6 +296,7 @@ def sell():
         if not row or row[0]["total_shares"] < shares_to_sell:
             return apology("not enough shares")
 
+        # Lookup current stock price
         stock = lookup(symbol)
         if not stock:
             return apology("invalid symbol")
@@ -298,14 +304,19 @@ def sell():
         price = stock["price"]
         total_earnings = price * shares_to_sell
 
-        db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)",
-                   user_id, symbol, -shares_to_sell, price)
+        # Insert transaction as negative shares
+        db.execute("""
+            INSERT INTO transactions (user_id, symbol, shares, price)
+            VALUES (?, ?, ?, ?)
+        """, user_id, symbol, -shares_to_sell, price)
 
+        # Update user cash
         db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", total_earnings, user_id)
 
         return redirect("/")
 
     else:
+        # Fetch stocks user owns shares of
         rows = db.execute("""
             SELECT symbol FROM transactions
             WHERE user_id = ?
@@ -315,6 +326,7 @@ def sell():
 
         symbols = [row["symbol"] for row in rows]
         return render_template("sell.html", symbols=symbols)
+
 
 
 
