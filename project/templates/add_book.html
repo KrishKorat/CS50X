@@ -1,15 +1,29 @@
-{% extends 'base.html' %}
-{% block content %}
-<form method="POST">
-    <div class="mb-3">
-        <label>Title</label>
-        <input type="text" name="title" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>Author</label>
-        <input type="text" name="author" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Add</button>
-    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
-</form>
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="row justify-content-center mb-3">
+
+    <form action="/add" method="POST" class="col-lg-6 shadow-lg p-4 rounded">
+
+        <!-- Title -->
+        <div class="mb-3 form-group">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" required>
+        </div>
+
+        <!-- Author -->
+        <div class="mb-3 form-group">
+            <label class="form-label">Author</label>
+            <input type="text" name="author" class="form-control" required>
+        </div>
+
+        <!-- Add -->
+        <button type="submit" class="btn btn-primary">Add</button>
+
+        <!-- Cancel -->
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+
 {% endblock %}

@@ -23,12 +23,18 @@ init_db()
 
 # ----- Routes -----
 
+
+# Index
+
 @app.route('/')
 def index():
     conn = connect_db()
     books = conn.execute('SELECT * FROM books').fetchall()
     conn.close()
     return render_template('index.html', books=books)
+
+
+# Add
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_book():
@@ -42,7 +48,10 @@ def add_book():
         return redirect(url_for('index'))
     return render_template('add_book.html')
 
-@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+
+# Edit
+
+@app.route('/edit/<id>', methods=['GET', 'POST'])
 def edit_book(id):
     conn = connect_db()
     if request.method == 'POST':
@@ -56,7 +65,10 @@ def edit_book(id):
     conn.close()
     return render_template('edit_book.html', book=book)
 
-@app.route('/delete/<int:id>')
+
+# Delete
+
+@app.route('/delete/<id>')
 def delete_book(id):
     conn = connect_db()
     conn.execute('DELETE FROM books WHERE id = ?', (id,))
