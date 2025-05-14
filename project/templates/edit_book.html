@@ -3,18 +3,18 @@
 
 <div class="row justify-content-center mb-3">
 
-    <form action="/edit" method="POST" class="col-lg-6 shadow-lg p-4 rounded">
+    <form action="/edit/{{ book[0] }}" method="POST" class="col-lg-6 shadow-lg p-4 rounded">
 
         <!-- Title -->
         <div class="mb-3 form-group">
             <label class="form-label">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ book[1] }}" required>
+            <input type="text" name="title" class="form-control" value="{{ book[1] }}" autocomplete="off" required>
         </div>
 
         <!-- Author -->
         <div class="mb-3 form-group">
             <label class="form-label">Author</label>
-            <input type="text" name="author" class="form-control" value="{{ book[2] }}" required>
+            <input type="text" name="author" class="form-control" value="{{ book[2] }}" autocomplete="off" required>
         </div>
 
         <!-- Update -->
