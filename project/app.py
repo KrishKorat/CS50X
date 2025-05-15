@@ -22,10 +22,16 @@ conn.close()
 
 @app.route("/")
 def index():
+  search_query = request.args.get('search', '').strip().lower()
   conn = dbConn()
-  books = conn.execute("SELECT * FROM books").fetchall()
+  
+  if search_query:
+    books = conn.execute("SELECT * FROM books WHERE LOWER(title) LIKE ?", ('%' + search_query + '%',)).fetchall()
+  else:
+    books = conn.execute("SELECT * FROM books").fetchall()
+
   conn.close()
-  return render_template('index.html', books=books)
+  return render_template('index.html', books=books, search_query=search_query)
 
 
 
