@@ -7,14 +7,26 @@
 
         <!-- Title -->
         <div class="mb-3 form-group">
-            <label class="form-label">Title</label>
+            <label class="form-label">Title:</label>
             <input type="text" name="title" class="form-control" value="{{ book[1] }}" autocomplete="off" required>
         </div>
 
         <!-- Author -->
         <div class="mb-3 form-group">
-            <label class="form-label">Author</label>
+            <label class="form-label">Author:</label>
             <input type="text" name="author" class="form-control" value="{{ book[2] }}" autocomplete="off" required>
+        </div>
+
+        <!-- Category -->
+        <div class="mb-3 form-group">
+            <label class="form-label">Category:</label>
+            <select name="category" class="form-select">
+
+                {% set categories = ['Fiction', 'Non-Fiction', 'Self-Help', 'Education', 'Biography', 'Uncategorized'] %}
+                {% for c in categories %}
+                    <option value="{{ c }}" {% if c == book[3] %} selected {% endif %} >{{ c }}</option>
+                {% endfor %}
+            </select>
         </div>
 
         <!-- Update -->

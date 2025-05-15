@@ -35,9 +35,10 @@ def add_book():
   if request.method == 'POST':
     title = request.form['title']
     author = request.form['author']
+    category = request.form['category']
 
     conn = dbConn()
-    conn.execute("INSERT INTO books (title, author) VALUES (?, ?)", (title, author))
+    conn.execute("INSERT INTO books (title, author, category) VALUES (?, ?, ?)", (title, author, category))
     conn.commit()
     conn.close()
 
@@ -54,8 +55,9 @@ def edit_book(id):
   if request.method == 'POST':
     title = request.form['title']
     author = request.form['author']
+    category = request.form['category']
 
-    conn.execute('UPDATE books SET title = ?, author = ? WHERE id = ?', (title, author, id))
+    conn.execute('UPDATE books SET title = ?, author = ?, category = ? WHERE id = ?', (title, author, category, id))
 
     conn.commit()
     conn.close()

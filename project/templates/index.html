@@ -13,6 +13,7 @@
             <th>ID</th>
             <th>Title</th>
             <th>Author</th>
+            <th>Category</th>
             <th>Action</th>
         </thead>
 
@@ -23,6 +24,7 @@
                 <td>{{ book[0] }}</td>  <!-- id -->
                 <td>{{ book[1] }}</td>  <!-- Title -->
                 <td>{{ book[2] }}</td>  <!-- Author -->
+                <td>{{ book[3] }}</td>  <!-- Category -->
                 <td>
                     <!-- Edit -->
                     <a href="/edit/{{ book[0] }}" class="btn btn-warning btn-sm">Edit</a>
