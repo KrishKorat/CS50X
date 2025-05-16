@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<div class="row navbarr">
+<div class="row">
     <div class="col-lg-3">
         <h1 class="mb-5 text-center">📚 Book Shelf</h1>
     </div>
@@ -13,7 +13,7 @@
         <form action="/" method="GET">
             <div class="d-flex">
 
-                <input type="text" name="search" placeholder="Enter book to search" class="form-control me-2" value="{{ search_query }}">
+                <input autocomplete="off" type="text" name="search" placeholder="Enter book to search" class="form-control me-2" value="{{ search_query }}">
                 <button type="submit" class="btn btn-primary me-2">Search</button>
                 <a href="/" class="btn btn-secondary">Clear</a>
             </div>
@@ -23,8 +23,32 @@
 
 
 
-    <!-- Btn to add book -->
-    <a href="/add" class="btn btn-success mb-3">Add book</a>
+<div class="row">
+    <div class="col-auto">
+        
+        <!-- Btn to add book -->
+        <a href="/add" class="btn btn-success mb-3">Add book</a>
+    </div>
+
+    <div class="col-auto">
+
+        <!-- Filter by category -->
+        <form method="GET" action="/" class="mb-3" onchange="this.submit()">
+            <select class="form-select" name="category">
+                <option value="" disabled selected>Select Category</option>
+
+                {% for c in categories %}
+                    <option value="{{ c }}" {% if c == selected_category %} selected {%endif%}>{{ c }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+</div>
+
+
+
+
+    
 
 
 

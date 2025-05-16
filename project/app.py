@@ -23,15 +23,40 @@ conn.close()
 @app.route("/")
 def index():
   search_query = request.args.get('search', '').strip().lower()
+  selected_category = request.args.get('category', '')
+
+
   conn = dbConn()
+
+  categories = conn.execute("SELECT DISTINCT category FROM books").fetchall()
+
+  query = "SELECT * FROM books"
+  conditions = []
+  params = []
+  
   
   if search_query:
-    books = conn.execute("SELECT * FROM books WHERE LOWER(title) LIKE ?", ('%' + search_query + '%',)).fetchall()
-  else:
-    books = conn.execute("SELECT * FROM books").fetchall()
+    conditions.append("LOWER(title) LIKE ?")
+    params.append(f"%{search_query}%")
+  
+  if selected_category:
+    conditions.append("category = ?")
+    params.append(selected_category)
 
+  
+  if conditions:
+    query += " WHERE " + " AND ".join(conditions)
+  
+  books = conn.execute(query, params).fetchall()
   conn.close()
-  return render_template('index.html', books=books, search_query=search_query)
+
+  return render_template(
+    'index.html', 
+    books=books, 
+    search_query=search_query,
+    categories = [c[0] for c in categories],
+    selected_category=selected_category
+  )
 
 
 
