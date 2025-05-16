@@ -13,7 +13,8 @@ conn.execute('''
   CREATE TABLE IF NOT EXISTS books (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
-    author TEXT NOT NULL 
+    author TEXT NOT NULL.
+    category TEXT DEFAULT 'Uncategorized'
   )
 ''')
 conn.close()
