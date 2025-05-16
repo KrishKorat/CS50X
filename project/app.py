@@ -23,7 +23,8 @@ conn.close()
 @app.route("/")
 def index():
   search_query = request.args.get('search', '').strip().lower()
-  selected_category = request.args.get('category', '')
+  selected_category = request.args.get('category', '').strip()
+  sort_order = request.args.get('sort', '').strip()
 
 
   conn = dbConn()
@@ -34,14 +35,21 @@ def index():
   conditions = []
   params = []
   
-  
+
   if search_query:
     conditions.append("LOWER(title) LIKE ?")
     params.append(f"%{search_query}%")
   
+
   if selected_category:
     conditions.append("category = ?")
     params.append(selected_category)
+
+
+  if sort_order == 'asc':
+    query += " ORDER BY title ASC"
+  elif sort_order == 'desc':
+    query += " ORDER BY title DESC"
 
   
   if conditions:
@@ -55,7 +63,8 @@ def index():
     books=books, 
     search_query=search_query,
     categories = [c[0] for c in categories],
-    selected_category=selected_category
+    selected_category=selected_category,
+    sort_order=sort_order
   )
 
 

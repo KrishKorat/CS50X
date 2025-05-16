@@ -35,11 +35,24 @@
         <!-- Filter by category -->
         <form method="GET" action="/" class="mb-3" onchange="this.submit()">
             <select class="form-select" name="category">
-                <option value="" disabled selected>Select Category</option>
+                <option value="">Select Category</option>
 
                 {% for c in categories %}
                     <option value="{{ c }}" {% if c == selected_category %} selected {%endif%}>{{ c }}</option>
                 {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <div class="col-auto">
+
+        <!-- Sorting by book name -->
+        <form method="GET" action="/" class="mb-3" onchange="this.submit()">
+            <select class="form-select" name="sort">
+                <option value="">Sort by book</option>
+                
+                <option value="asc" {% if sort_order == "asc" %} selected {%endif%}>↑ Ascending  (A-Z)</option>
+                <option value="desc" {% if sort_order == "desc" %} selected {%endif%}>↓ Descending (Z-A)</option>
             </select>
         </form>
     </div>
