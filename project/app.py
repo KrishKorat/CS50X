@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
+import hashlib
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ conn.execute('''
   CREATE TABLE IF NOT EXISTS books (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
-    author TEXT NOT NULL.
+    author TEXT NOT NULL,
     category TEXT DEFAULT 'Uncategorized'
   )
 ''')
@@ -120,6 +121,46 @@ def delete_book(id):
   conn.close()
 
   return redirect('/')
+
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+  if request.method == 'PSOT':
+    username = request.form['username'].strip()
+    password = request.form['password']
+    confirm = request.form['confirm']
+
+    if password != confirm:
+      return "Passwords do not match"
+    
+    password_hash = hashlib.sha256(password.encode()).hexdigest()
+
+    conn = dbConn()
+
+    try:
+      conn.execute("INSTER INTO users (username, password) VALUES (?, ?)", (username, password_hash))
+      conn.commit()
+      conn.close()
+
+      return redirect('/login')
+    except:
+      return "Username already exist"
+
+  return render_template('register.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
