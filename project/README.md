@@ -1,4 +1,4 @@
-# 📚 MyBookShelf – A Simple Book Management Web App
+# 📚 MyBookShelf
 
 #### Video Demo:  <URL HERE>
 #### Description:
