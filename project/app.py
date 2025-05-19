@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session, flash, url_for
 import sqlite3
 import hashlib
 
 app = Flask(__name__)
+app.secret_key = 'Fiwafjwjc3oiu3112193rdfkjkjekja'
 
 
 def dbConn():
@@ -24,6 +25,11 @@ conn.close()
 
 @app.route("/")
 def index():
+
+  if 'user_id' not in session:
+    return redirect(url_for('login'))
+  
+
   search_query = request.args.get('search', '').strip().lower()
   selected_category = request.args.get('category', '').strip()
   sort_order = request.args.get('sort', '').strip()
@@ -124,9 +130,11 @@ def delete_book(id):
 
 
 
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-  if request.method == 'PSOT':
+  if request.method == 'POST':
     username = request.form['username'].strip()
     password = request.form['password']
     confirm = request.form['confirm']
@@ -139,7 +147,7 @@ def register():
     conn = dbConn()
 
     try:
-      conn.execute("INSTER INTO users (username, password) VALUES (?, ?)", (username, password_hash))
+      conn.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password_hash))
       conn.commit()
       conn.close()
 
@@ -153,6 +161,35 @@ def register():
 
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  if request.method == 'POST':
+    username = request.form['username']
+    password = request.form['password']
+    password_hash = hashlib.sha256(password.encode()).hexdigest()
+
+    conn = dbConn()
+    user = conn.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password_hash)).fetchone()
+    conn.close()
+
+    if user:
+      session['user_id'] = user[0]
+      session['username'] = user[1]
+      return redirect('/')
+    else:
+      return 'Invalid username or password'
+    
+  return render_template('login.html')
+
+
+
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('You have been logged out.', 'info')
+    return redirect('/login')
 
 
 

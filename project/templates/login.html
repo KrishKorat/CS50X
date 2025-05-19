@@ -10,9 +10,9 @@
 
 <div class="row justify-content-center mb-3">
 
-    <form action="/register" method="POST" class="col-lg-5 shadow-lg p-4 rounded">
+    <form action="/login" method="POST" class="col-lg-5 shadow-lg p-4 rounded">
 
-      <h3 class="text-center mb-4">Registeration</h3>
+      <h3 class="text-center mb-4">Login</h3>
 
         <!-- Username -->
         <div class="mb-3 form-group">
@@ -26,22 +26,16 @@
             <input type="password" name="password" class="form-control" autocomplete="off" required>
         </div>
 
-        <!-- Confirm -->
-        <div class="mb-4 form-group">
-            <label class="form-label">Confirm Password:</label>
-            <input type="password" name="confirm" class="form-control" autocomplete="off" required>
-        </div>
-
 
         <!-- Register -->
         <div class="container">
           <div class="row">
             
-            <button type="submit" class="btn btn-primary mb-3">Register</button>
+            <button type="submit" class="btn btn-primary mb-3">Login</button>
           </div>
         </div>
         <div>
-          <p class="text-center">Already registered? <a href="login">Log in</a></p>
+          <p class="text-center">Haven't registered? <a href="register">Register</a></p> 
         </div>
         
     </form>
