@@ -1,7 +1,6 @@
 
 ---
 
-````markdown
 # MyBookShelf – A Personal Book Tracker Web App  
 #### Video Demo: <URL HERE>  
 #### Description:
@@ -95,7 +94,6 @@ This project was inspired by the need for a minimal and easy-to-use personal lib
 1. **Install Requirements**  
    ```bash
    pip install -r requirements.txt
-````
 
 2. **Initialize the Database**
    Create a `books.db` file and run the schema creation code once to generate tables.
@@ -125,7 +123,3 @@ This project was inspired by the need for a minimal and easy-to-use personal lib
 
 MyBookShelf is a fully functional book tracking application ideal for individual users. It was developed with a focus on clarity, modularity, and minimalism. It demonstrates solid foundational knowledge of web development, including authentication, session handling, CRUD operations, dynamic rendering, and secure password storage. It can be extended into a much more powerful system but serves well even in its current lightweight form.
 
-```
-
-Let me know when you’re ready for me to add or update your `requirements.txt` file accordingly!
-```
