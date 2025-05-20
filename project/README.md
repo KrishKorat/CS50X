@@ -1,7 +1,7 @@
 
 ---
 
-# MyBookShelf – A Personal Book Tracker Web App  
+# BookShelf – A Personal Book Tracker Web App  
 #### Video Demo: <URL HERE>  
 #### Description:
 
