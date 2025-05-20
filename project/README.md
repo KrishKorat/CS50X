@@ -129,8 +129,6 @@ MyBookShelf/
 │   ├── login.html           # Login form page
 │   ├── register.html        # Registration form page with password confirmation
 │   ├── edit.html            # Edit book details including reading status
-├── static/                  # Static files (optional, e.g. CSS or JS if added)
-│   └── (empty or add custom CSS/JS here)
 ```
 
 ---
