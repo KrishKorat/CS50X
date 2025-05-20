@@ -26,6 +26,7 @@ This project was inspired by the need for a minimal and easy-to-use personal lib
   The app includes a robust search system:
   - **By Book Title**
   - **By Category**
+  - **By Status
   - **By Sorting (Ascending or Descending Title Order)**  
   All search types are kept logically separate in code for clarity and scalability.
 
@@ -57,9 +58,13 @@ This project was inspired by the need for a minimal and easy-to-use personal lib
 - **`templates/register.html` and `templates/login.html`**:  
   These pages allow users to register and login with simple forms, styled with Bootstrap classes.
 
-- **`templates/edit.html`**:  
+- **`templates/add_book.html`**:
+  A dynamic form to add new book entries.
+  
+- **`templates/edit_book.html`**:  
   A dynamic form to edit existing book entries, pre-populated with current values.
 
+  
 - **`books.db`**:  
   SQLite3 database file storing all books and user credentials. It has two main tables:
   - `books`: stores id, title, author, category, and status.
@@ -109,13 +114,24 @@ This project was inspired by the need for a minimal and easy-to-use personal lib
 
 ---
 
-## 📌 Future Improvements
+---
 
-* Add book cover image upload
-* Allow tagging and multiple categories per book
-* Add sort/filter by date added
-* Pagination and improved search suggestions
-* Allow exporting bookshelf as CSV or JSON
+## 📁 File Structure
+
+```
+MyBookShelf/
+├── books.db                  # SQLite3 database storing users and books
+├── app.py                   # Main Flask application with routing and logic
+├── requirements.txt         # Python dependencies required to run the app
+├── README.md                # Detailed project documentation
+├── templates/               # HTML templates rendered by Flask
+│   ├── index.html           # Homepage with book listing, search, filter, sort
+│   ├── login.html           # Login form page
+│   ├── register.html        # Registration form page with password confirmation
+│   ├── edit.html            # Edit book details including reading status
+├── static/                  # Static files (optional, e.g. CSS or JS if added)
+│   └── (empty or add custom CSS/JS here)
+```
 
 ---
 
