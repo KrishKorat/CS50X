@@ -1,4 +1,4 @@
-# 📚 MyBookShelf
+# 📚 BookShelf
 
 #### Video Demo:  <URL HERE>
 #### Description:
