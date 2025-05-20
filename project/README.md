@@ -5,6 +5,8 @@
 
 **MyBookShelf** is a beginner-friendly CRUD (Create, Read, Update, Delete) web application built using **Flask** and **SQLite**. It allows users to manage a personal digital bookshelf—adding books, searching, filtering, sorting, and even registering/logging in to manage their collections. This project is ideal for beginners who want to get hands-on experience with web development, backend logic, and database handling using Python.
 
+<br />
+
 ### 🔍 Key Features
 
 * **Add New Books**: Users can input book details such as title, author, and category.
@@ -16,6 +18,8 @@
 * **Clean Interface**: Built with Bootstrap for a responsive and user-friendly experience.
 * **No Result Message**: Displays a "No books found" message when no matches exist.
 
+<br />
+
 ### 🔧 Tech Stack
 
 * **Backend**: Python (Flask)
@@ -23,15 +27,17 @@
 * **Database**: SQLite (books.db)
 * **Templating Engine**: Jinja2
 
-### 💡 Learning Objectives
+<br />
 
-This project is perfect for those learning:
+### 💡 Learning Objectives
 
 * Routing and HTTP methods in Flask
 * Database CRUD operations using SQLite
 * Session handling and user authentication
 * Integrating backend logic with frontend templates
 * Using forms for user interaction and data manipulation
+
+<br />
 
 ### ✅ Getting Started
 
