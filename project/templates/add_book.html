@@ -28,7 +28,7 @@
 
         <!-- Category -->
          <div class="mb-3 form-group">
-            <label>Category:</label>
+            <label class="form-label">Category:</label>
             <select name="category" class="form-select">
                 <option value="" disabled selected>Select category</option>
                 <option>Fiction</option>
@@ -39,6 +39,18 @@
                 <option>Uncategorized</option>
             </select>
          </div>
+
+         <!-- Status -->
+        <div class="mb-3 form-group">
+            <label class="form-label">Status:</label>
+            <select name="status" class="form-select">
+                <option value="" disabled selected>Select status</option>
+                <option>Reading</option>
+                <option>On hold</option>
+                <option>Completed</option>
+                <option>plan to read</option>
+            </select>
+        </div>
 
         <!-- Add -->
         <button type="submit" class="btn btn-primary">Add</button>

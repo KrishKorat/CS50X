@@ -38,6 +38,18 @@
             </select>
         </div>
 
+        <!-- Status -->
+        <div class="mb-3 form-group">
+            <label class="form-label">Status:</label>
+            <select name="status" class="form-select">
+
+                {% set status = ['plan to read', 'Reading', 'On hold', 'Completed'] %}
+                {% for s in status %}
+                    <option value="{{ s }}" {% if s == book[4] %}selected {% endif %}>{{ s }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
         <!-- Update -->
         <button type="submit" class="btn btn-primary">Update</button>
 

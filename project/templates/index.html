@@ -35,9 +35,25 @@
         <a href="/add" class="btn btn-success mb-3">Add book</a>
     </div>
 
-    <div class="col-lg-6"></div>
+    <div class="col-lg-4"></div>
 
     <div class="col-lg-2">
+
+
+        <!-- Filter by reading status -->
+        <form method="GET" action="/" class="mb-3" onchange="this.submit()">
+            <select class="form-select" name="status">
+                <option value="">Select Status</option>
+
+                {% for s in status %}
+                    <option value="{{ s }}" {% if s == selected_status %} selected {%endif%}>{{ s }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <div class="col-lg-2">
+
 
         <!-- Filter by category -->
         <form method="GET" action="/" class="mb-3" onchange="this.submit()">
@@ -82,6 +98,7 @@
             <th>Title</th>
             <th>Author</th>
             <th>Category</th>
+            <th>Status</th>
             <th>Action</th>
         </thead>
 
@@ -93,6 +110,7 @@
                 <td>{{ book[1] }}</td>  <!-- Title -->
                 <td>{{ book[2] }}</td>  <!-- Author -->
                 <td>{{ book[3] }}</td>  <!-- Category -->
+                <td>{{ book[4] }}</td>  <!-- Status -->
                 <td>
                     <!-- Edit -->
                     <a href="/edit/{{ book[0] }}" class="btn btn-warning btn-sm">Edit</a>

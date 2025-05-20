@@ -16,7 +16,8 @@ conn.execute('''
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     author TEXT NOT NULL,
-    category TEXT DEFAULT 'Uncategorized'
+    category TEXT DEFAULT 'Uncategorized',
+    status TEXT DEFAULT 'plan to read'
   )
 ''')
 conn.close()
@@ -33,11 +34,13 @@ def index():
   search_query = request.args.get('search', '').strip().lower()
   selected_category = request.args.get('category', '').strip()
   sort_order = request.args.get('sort', '').strip()
+  selected_status = request.args.get('status', '').strip()
 
 
   conn = dbConn()
 
   categories = conn.execute("SELECT DISTINCT category FROM books").fetchall()
+  status = conn.execute("SELECT DISTINCT status FROM books").fetchall()
 
   query = "SELECT * FROM books"
   conditions = []
@@ -59,6 +62,10 @@ def index():
   elif sort_order == 'desc':
     query += " ORDER BY title DESC"
 
+
+  if selected_status:
+    conditions.append("status = ?")
+    params.append(selected_status)
   
   if conditions:
     query += " WHERE " + " AND ".join(conditions)
@@ -72,7 +79,9 @@ def index():
     search_query=search_query,
     categories = [c[0] for c in categories],
     selected_category=selected_category,
-    sort_order=sort_order
+    sort_order=sort_order,
+    status = [s[0] for s in status],
+    selected_status=selected_status
   )
 
 
@@ -84,9 +93,10 @@ def add_book():
     title = request.form['title']
     author = request.form['author']
     category = request.form['category']
+    status = request.form.get('status', 'plan to read')
 
     conn = dbConn()
-    conn.execute("INSERT INTO books (title, author, category) VALUES (?, ?, ?)", (title, author, category))
+    conn.execute("INSERT INTO books (title, author, category, status) VALUES (?, ?, ?, ?)", (title, author, category, status))
     conn.commit()
     conn.close()
 
@@ -104,8 +114,9 @@ def edit_book(id):
     title = request.form['title']
     author = request.form['author']
     category = request.form['category']
+    status = request.form.get('status', 'plan to read')
 
-    conn.execute('UPDATE books SET title = ?, author = ?, category = ? WHERE id = ?', (title, author, category, id))
+    conn.execute('UPDATE books SET title = ?, author = ?, category = ?, status = ? WHERE id = ?', (title, author, category, status, id))
 
     conn.commit()
     conn.close()
