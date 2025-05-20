@@ -9,8 +9,8 @@
 
 ### 🔍 Key Features
 
-* **Add New Books**: Users can input book details such as title, author, and category.
-* **Dynamic Search**: Real-time search based on book title, category filter, and sorting options.
+* **Add New Books**: Users can input book details such as title, author, category, status.
+* **Dynamic Search**: Real-time search based on book title, category filter, status filter and sorting options.
 * **Sort Functionality**: Sort books alphabetically in ascending or descending order.
 * **Login & Registration**: Simple authentication system with hashed passwords and confirm-password validation.
 * **Session Management**: Tracks logged-in users using Flask sessions.
