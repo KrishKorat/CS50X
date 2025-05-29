@@ -1,6 +1,6 @@
 # CS50x 2025
 
-This repository contains my solutions and notes for Harvard's CS50x 2025 course.
+This repository contains solutions for Harvard's CS50x 2025 course.
 
 ## Contents
 
@@ -14,4 +14,4 @@ This repository contains my solutions and notes for Harvard's CS50x 2025 course.
 - Lecture 7: SQL
 - Lecture 8: HTML, CSS, JavaScript
 - Lecture 9: Flask
-- Project: Final Project
+- Project: Final Project (BookShelf)
