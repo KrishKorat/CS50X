@@ -2,6 +2,10 @@
 
 This repository contains solutions for Harvard's CS50x 2025 course.
 
+## Certificate :
+
+<img src="CS50x.png">
+
 ## Contents :
 
 - Lecture 0: Scratch
@@ -15,7 +19,3 @@ This repository contains solutions for Harvard's CS50x 2025 course.
 - Lecture 8: HTML, CSS, JavaScript
 - Lecture 9: Flask
 - Project: Final Project (BookShelf)
-
-## Certificate :
-
-<img src="CS50x.png">
